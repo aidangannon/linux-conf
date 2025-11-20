@@ -28,12 +28,11 @@ require("lazy").setup({
     config = function()
       require('mason').setup()
       require('mason-lspconfig').setup({
-        ensure_installed = { 'ts_ls', 'pyright', 'pylsp' }
+        ensure_installed = { 'ts_ls', 'pyright' }
       })
       
       vim.lsp.enable('ts_ls')
       vim.lsp.enable('pyright')
-      vim.lsp.enable('pylsp')
       
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
