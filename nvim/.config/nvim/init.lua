@@ -33,7 +33,7 @@ require("lazy").setup({
       
       vim.lsp.enable('ts_ls')
       vim.lsp.enable('pyright')
-      vim.api.nvim_create_autocmd('LspAttach', require('config.lsp-keymap'))
+      vim.api.nvim_create_autocmd('LspAttach', require('config.lsp-keymaps'))
     end,
   },
   {
