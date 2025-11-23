@@ -1,3 +1,9 @@
+local keymaps = {
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-Space>"] = cmp.mapping.complete()
+}
+
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -12,10 +18,7 @@ return {
                     require("luasnip").lsp_expand(args.body)
                 end
             },
-            mapping = cmp.mapping.preset.insert({
-                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete()
-            }),
+            mapping = cmp.mapping.preset.insert(keymaps),
             sources = {
                 { name = "nvim_lsp" }
             }
