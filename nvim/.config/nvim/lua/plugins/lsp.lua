@@ -23,11 +23,17 @@ return {
     config = function()
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "ts_ls", "pyright", "lua_ls" }
+            ensure_installed = {
+                "ts_ls",
+                "pyright",
+                "lua_ls",
+                "terraformls"
+            }
         })
         
         vim.lsp.enable("ts_ls")
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("pyright")
+        vim.lsp.enable("terraformls")
     end
 }
