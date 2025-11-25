@@ -27,6 +27,7 @@ return {
                     "lua",
                     "hcl",
                     "terraform",
+                    "c_sharp"
                 },
                 highlight = { enable = true },
                 indent = { enable = true },
@@ -54,6 +55,7 @@ return {
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("pyright")
             vim.lsp.enable("terraformls")
+            vim.lsp.config("roslyn", {})
         end
     },
     autocomplete = {

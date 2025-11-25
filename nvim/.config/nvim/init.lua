@@ -11,6 +11,21 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    {
+        "williamboman/mason.nvim",
+        opts = {
+            registries = {
+                "github:mason-org/mason-registry",
+                "github:Crashdummyy/mason-registry"
+            },
+            ensure_installed = {
+                "csharpier",
+                "roslyn",
+                "rzls"
+            }
+        }
+    },
+    require("plugins.csharp"),
     require("plugins.lang").ats,
     require("plugins.lang").lsp,
     require("plugins.lang").autocomplete,
