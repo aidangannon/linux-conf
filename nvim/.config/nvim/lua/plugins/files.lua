@@ -33,6 +33,9 @@ return {
         config = function()
             require("nvim-tree").setup({
                 on_attach = on_nvim_tree_attach,
+                renderer = {
+                    full_name = true,
+                }
             })
         end
     }
