@@ -76,13 +76,6 @@ return {
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("pyright")
             vim.lsp.enable("terraformls")
-            vim.lsp.config("roslyn", {
-                settings = {
-                    ["csharp|completion"] = {
-                        dotnet_show_completion_items_from_unimported_namespaces = true,
-                    }
-                }
-            })
         end
     },
     autocomplete = {

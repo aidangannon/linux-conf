@@ -23,15 +23,17 @@ end
 c_sharp_setup_cmd()
 sync_filesys_to_namespace_autocmd()
 
-local function in_csharp_project()
-    local has_sln = vim.fn.glob("*.sln") ~= ""
-    local has_csproj = vim.fn.glob("**/*.csproj") ~= ""
-    return has_sln or has_csproj
-end
+-- Configure roslyn BEFORE the plugin loads
+vim.lsp.config("roslyn", {
+    settings = {
+        ["csharp|completion"] = {
+            dotnet_show_completion_items_from_unimported_namespaces = true,
+        }
+    }
+})
 
 return {
     "seblyng/roslyn.nvim",
-    lazy = not in_csharp_project(),
-    ft = { "cs" },
+    lazy = false,
     opts = {}
 }
