@@ -41,3 +41,4 @@ echo -e "\033[1;32m🚩 Wired In Dawggg\033[0m"
 echo ""
 
 tmux
+alias netcoredbg="/usr/local/bin/netcoredbg/netcoredbg"
