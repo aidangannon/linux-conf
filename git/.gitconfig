@@ -2,8 +2,8 @@
     autoSetupRemote = true
 
 [user]
-    name = Aidan Gannon
-    email = aidanwilliamgannon@email.com
+    name = aidangannon
+    email = aidanwilliamgannon@gmail.com
 
 [core]
     editor = nvim
