@@ -1,15 +1,20 @@
 DOTFILES_DIR := $(shell pwd)
+FOLDERS := bash git tmux nvim
 
 .PHONY: install
 install: uninstall
-	ln -sf $(DOTFILES_DIR)/bash/.bashrc $$HOME/.bashrc
-	ln -sf $(DOTFILES_DIR)/git/.gitconfig $$HOME/.gitconfig
-	ln -sf $(DOTFILES_DIR)/tmux/.tmux.conf $$HOME/.tmux.conf
-	ln -sf $(DOTFILES_DIR)/nvim/.config $$HOME/.config
+	@for folder in $(FOLDERS); do \
+		find $(DOTFILES_DIR)/$${folder} -maxdepth 1 -mindepth 1 | while read item; do \
+			echo "ln -sf $${item} $$HOME/"; \
+			ln -sf $${item} $$HOME/; \
+		done; \
+	done
 
 .PHONY: uninstall
 uninstall:
-	rm -f $$HOME/.bashrc
-	rm -f $$HOME/.gitconfig
-	rm -f $$HOME/.tmux.conf
-	rm -f $$HOME/.config
+	@for folder in $(FOLDERS); do \
+		find $(DOTFILES_DIR)/$${folder} -maxdepth 1 -mindepth 1 | while read item; do \
+			echo "rm -rf $$HOME/$$(basename $${item})"; \
+			rm -rf $$HOME/$$(basename $${item}); \
+		done; \
+	done
