@@ -1,0 +1,14 @@
+[push]
+    autoSetupRemote = true
+
+[user]
+    name = Aidan Gannon
+    email = aidanwilliamgannon@email.com
+
+[core]
+    editor = nvim
+
+[alias]
+    st = status
+    co = checkout
+    br = branch

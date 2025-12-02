@@ -1,19 +1,15 @@
-SUBFOLDERS := bash nvim tmux
+DOTFILES_DIR := $(shell pwd)
 
-.PHONY:
+.PHONY: install
 install: uninstall
-	@for dir in $(SUBFOLDERS); do \
-		echo "creating symlinks for $$dir"; \
-		for item in $$dir/*; do \
-			ln -sf "$(PWD)/$$item" "$$HOME/$$(basename $$item)"; \
-		done; \
-	done
+	ln -sf $(DOTFILES_DIR)/bash/.bashrc $$HOME/.bashrc
+	ln -sf $(DOTFILES_DIR)/git/.gitconfig $$HOME/.gitconfig
+	ln -sf $(DOTFILES_DIR)/tmux/.tmux.conf $$HOME/.tmux.conf
+	ln -sf $(DOTFILES_DIR)/nvim/.config $$HOME/.config
 
-.PHONY:
+.PHONY: uninstall
 uninstall:
-	@for dir in $(SUBFOLDERS); do \
-		echo "removing symlinks for $$dir"; \
-		for item in $$dir/*; do \
-			rm -f "$(PWD)/$$item" "$$HOME/$$(basename $$item)"; \
-		done; \
-	done
+	rm -f $$HOME/.bashrc
+	rm -f $$HOME/.gitconfig
+	rm -f $$HOME/.tmux.conf
+	rm -f $$HOME/.config
