@@ -20,7 +20,8 @@ require("lazy").setup({
             }
         }
     },
-    require("plugins.csharp"),
+    require("plugins.csharp").lsp,
+    require("plugins.csharp").filewatching,
     require("plugins.lang").navigation,
     require("plugins.lang").ats,
     require("plugins.lang").lsp,
