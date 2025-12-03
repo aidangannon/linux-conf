@@ -2,23 +2,13 @@ local function c_sharp_setup_cmd()
     vim.api.nvim_create_user_command("CSharpSetup", function()
         vim.cmd("MasonInstall roslyn csharpier")
     end, { desc = "Install C# tools" })
-
-    vim.api.nvim_create_user_command("CSharpNotifyFile", function()
-        for _, client in ipairs(vim.lsp.get_clients({name = "roslyn"})) do
-            client.notify("workspace/didChangeWatchedFiles", {
-                changes = {{ uri = vim.uri_from_bufnr(0), type = 1 }}
-            })
-        end
-    end, { desc = "Notify Roslyn of file change" })
 end
 
 c_sharp_setup_cmd()
 
--- Notify Roslyn on file create
 vim.api.nvim_create_autocmd("BufNewFile", {
     pattern = "*.cs",
     callback = function(args)
-        -- Save the file first so it exists on disk
         vim.defer_fn(function()
             if vim.fn.filereadable(vim.fn.expand("%")) == 0 then
                 vim.cmd("write")
@@ -28,14 +18,12 @@ vim.api.nvim_create_autocmd("BufNewFile", {
                 client.notify("workspace/didChangeWatchedFiles", {
                     changes = {{ uri = vim.uri_from_bufnr(args.buf), type = 1 }}
                 })
-                -- Also send didOpen to ensure Roslyn tracks the file
                 vim.lsp.buf_attach_client(args.buf, client.id)
             end
         end, 50)
     end
 })
 
--- Notify Roslyn on file delete
 vim.api.nvim_create_autocmd("BufDelete", {
     pattern = "*.cs",
     callback = function(args)
@@ -47,7 +35,6 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
 })
 
--- Notify Roslyn on file write (covers renames/moves from file explorers)
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = "*.cs",
     callback = function()
