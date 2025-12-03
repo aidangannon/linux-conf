@@ -64,7 +64,6 @@ return {
         "seblyng/roslyn.nvim",
         ft = "cs",
         opts = {
-            filewatching = "auto",
             config = {
                 settings = {
                     ["csharp|completion"] = {
@@ -77,10 +76,6 @@ return {
                     ["csharp|code_lens"] = {
                         dotnet_enable_references_code_lens = true
                     },
-                    ["csharp|background_analysis"] = {
-                        dotnet_compiler_diagnostics_scope = "fullSolution",
-                        dotnet_analyzer_diagnostics_scope = "fullSolution"
-                    }
                 }
             }
         }
