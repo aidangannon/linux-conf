@@ -11,11 +11,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 export PATH="/opt/nvim/bin:$PATH"
+export PATH="/opt/nvim-linux-x86_64/bin:/opt/nvim/bin:$PATH"
+
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$HOME/.dotnet:$PATH
 
 eval "$(starship init bash)"
 
 alias ll='ls -alF'
 alias git-up='git push --set-upstream origin'
+alias git-rollback='git reset --hard'
 alias netdbg='netcoredbg --interpreter=cli --attach'
 alias nettest='dotnet test filter '
 
@@ -38,3 +43,4 @@ echo -e "\033[1;32m🚩 Wired In Dawggg\033[0m"
 echo ""
 
 tmux
+alias netcoredbg="/usr/local/bin/netcoredbg/netcoredbg"
