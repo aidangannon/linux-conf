@@ -1,9 +1,6 @@
 return {
-    "folke/tokyonight.nvim",
+    "aonemd/kuroi.vim",
     config = function()
-        require("tokyonight").setup({
-            style = "day",
-        })
-        vim.cmd("colorscheme tokyonight-day")
+        vim.opt.termguicolors = true
     end
 }
