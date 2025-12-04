@@ -22,7 +22,8 @@ alias ll='ls -alF'
 alias git-up='git push --set-upstream origin'
 alias git-rollback='git reset --hard'
 alias netdbg='netcoredbg --interpreter=cli --attach'
-alias nettest='dotnet test filter '
+alias nettest='dotnet test --filter '
+alias nettest-dbg='VSTEST_HOST_DEBUG=1 dotnet test --filter '
 
 echo -e "\033[1;36m"
 echo "╔═══════════════════════════════════════════════════════════╗"
