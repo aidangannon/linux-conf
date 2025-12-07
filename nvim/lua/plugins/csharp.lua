@@ -38,7 +38,9 @@ end, { desc = "Restart Roslyn LSP" })
 return {
     lsp = {
         "seblyng/roslyn.nvim",
-        ft = "cs",
-        opts = {},
+        -- NO ft lazy loading - seblyng says it causes issues
+        opts = {
+            filewatching = "roslyn", -- Explicitly use Roslyn's file watcher (important for WSL)
+        },
     },
 }
