@@ -6,18 +6,6 @@ local snacks_keymaps = {
     { "<leader>rF", function() Snacks.rename.rename_file() end },
 }
 
-local function nvim_tree_keymaps()
-    vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>")
-    vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>")
-end
-
-local function on_nvim_tree_attach(bufnr)
-    local api = require("nvim-tree.api")
-    api.config.mappings.default_on_attach(bufnr)
-end
-
-nvim_tree_keymaps()
-
 return {
     files = {
         "folke/snacks.nvim",
@@ -29,15 +17,33 @@ return {
         keys = snacks_keymaps
     },
     explorer = {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = { "folke/snacks.nvim" },
-        config = function()
-            require("nvim-tree").setup({
-                on_attach = on_nvim_tree_attach,
-                renderer = {
-                    full_name = true,
-                }
-            })
-        end
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        keys = {
+            { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+            { "<leader>ef", "<cmd>Neotree reveal<cr>", desc = "Reveal file in Neo-tree" },
+        },
+        opts = {
+            close_if_last_window = true,
+            filesystem = {
+                follow_current_file = {
+                    enabled = true,
+                    leave_dirs_open = false,
+                },
+                filtered_items = {
+                    hide_dotfiles = false,
+                    hide_gitignored = false,
+                },
+            },
+            window = {
+                position = "left",
+                width = 30,
+            },
+        },
     }
 }

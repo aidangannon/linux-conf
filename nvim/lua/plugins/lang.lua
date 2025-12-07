@@ -62,16 +62,23 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         config = function()
-            require("mason").setup()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "ts_ls",
-                    "pyright",
-                    "lua_ls",
-                    "terraformls"
-                }
-            })
+            -- Get capabilities from nvim-cmp
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+            if ok then
+                capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+            end
 
+            require("mason").setup()
+            require("mason-lspconfig").setup({}) -- Empty setup for auto-discovery
+
+            -- Configure all servers consistently with vim.lsp.config()
+            vim.lsp.config("ts_ls", { capabilities = capabilities })
+            vim.lsp.config("lua_ls", { capabilities = capabilities })
+            vim.lsp.config("pyright", { capabilities = capabilities })
+            vim.lsp.config("terraformls", { capabilities = capabilities })
+
+            -- Enable servers
             vim.lsp.enable("ts_ls")
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("pyright")
