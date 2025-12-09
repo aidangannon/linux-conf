@@ -3,7 +3,9 @@ local function auto_save_command()
         "InsertLeave",
         "TextChanged",
         "TextChangedI",
-        "BufModifiedSet"
+        "BufModifiedSet",
+        "BufLeave",        -- Save when leaving buffer (important for :cdo)
+        "CmdlineLeave",    -- Save after command execution
     }, {
         callback = function()
             if vim.bo.modified and vim.bo.buftype == "" then
