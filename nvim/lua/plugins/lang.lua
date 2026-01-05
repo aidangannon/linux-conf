@@ -27,7 +27,6 @@ local function lsp_keymaps()
                     end
                     if result then
                         vim.lsp.util.apply_workspace_edit(result, "utf-8")
-                        -- Save all modified buffers after edit is applied
                         vim.defer_fn(function()
                             for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
                                 if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].modified then
@@ -104,7 +103,6 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         config = function()
-            -- Get capabilities from nvim-cmp
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
             if ok then
@@ -112,18 +110,18 @@ return {
             end
 
             require("mason").setup()
-            require("mason-lspconfig").setup({}) -- Empty setup for auto-discovery
+            require("mason-lspconfig").setup({
+                ensure_installed = {"pyrefly", "lua_ls", "ts_ls", "terraformls"}
+            })
 
-            -- Configure all servers consistently with vim.lsp.config()
             vim.lsp.config("ts_ls", { capabilities = capabilities })
             vim.lsp.config("lua_ls", { capabilities = capabilities })
-            vim.lsp.config("pyright", { capabilities = capabilities })
+            vim.lsp.config("pyrefly", { capabilities = capabilities })
             vim.lsp.config("terraformls", { capabilities = capabilities })
 
-            -- Enable servers
             vim.lsp.enable("ts_ls")
             vim.lsp.enable("lua_ls")
-            vim.lsp.enable("pyright")
+            vim.lsp.enable("pyrefly")
             vim.lsp.enable("terraformls")
         end
     },
