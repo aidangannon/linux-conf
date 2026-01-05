@@ -46,17 +46,21 @@ echo -e "\033[1;32m🚩 Wired In Dawggg\033[0m"
 echo ""
 
 if [ -z "$TMUX" ]; then
-    tmux kill-server 2>/dev/null
-    tmux new-session
+    tmux kill-session -t dev 2>/dev/null
+    tmux new-session -s dev
 fi
 
-tmuxinit()
+ydle()
 {
-    tmux split-window -h -p 20 \; \
+    tmux split-window -h -p 20 -c "$current_dir" \; \
         split-window -v -p 35 \; \
         select-pane -t 0 \; \
-        split-window -v -p 15 \; \
-        select-pane -t 0
+        split-window -v -p 15 -c "$current_dir" \; \
+        select-pane -t 0 \; \
+        send-keys -t 0 "nvim" C-m \; \
+        send-keys -t 2 "cd $(pwd) && clear" C-m \; \
+        send-keys -t 3 "cd ~ && clear" C-m \; \
+        send-keys -t 1 "cd $(pwd) && claude --permission-mode plan" C-m
 }
 
 alias netcoredbg="/usr/local/bin/netcoredbg/netcoredbg"
