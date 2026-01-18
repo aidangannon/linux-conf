@@ -1,5 +1,11 @@
 vim.cmd("colorscheme vim")
 
+-- Override popup colors (removes magenta)
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1c1c1c", fg = "#d0d0d0" })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#5f87af", fg = "#ffffff" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1c1c1c", fg = "#d0d0d0" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#1c1c1c", fg = "#5f87af" })
+
 require("options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
