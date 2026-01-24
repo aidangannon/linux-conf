@@ -36,10 +36,10 @@ input type:keyboard {
 }
 
 mode "resize" {
-    bindsym Ctrl+b resize shrink width 10ppt
-    bindsym Ctrl+n resize grow height 10ppt
-    bindsym Ctrl+p resize shrink height 10ppt
-    bindsym Ctrl+f resize grow width 10ppt
+    bindsym Left resize shrink width 4ppt
+    bindsym Down resize grow height 4ppt
+    bindsym Up resize shrink height 4ppt
+    bindsym Right resize grow width 4ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -64,10 +64,10 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+e exit
 
-bindsym $mod+Ctrl+b focus left
-bindsym $mod+Ctrl+f focus right
-bindsym $mod+Ctrl+p focus up
-bindsym $mod+Ctrl+n focus down
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
 
 bindsym $mod+1 workspace number 1; mode "default";
 bindsym $mod+2 workspace number 2; mode "default";
